@@ -73,24 +73,28 @@ function renderPlaces(places) {
       let longitude = place.lon;
 
       // add place name
-      // let text = document.createElement('a-link');
+      let text = document.createElement('a-link');
+      text.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+      text.setAttribute('obj-model', './Assets/OBJ/1.obj');
+      text.setAttribute('title', place.tags.name);
+      text.setAttribute('scale', '45 45 45');
+
+      // let text = document.createElement('a-text');
       // text.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
       // text.setAttribute('gltf-model', './Assets/GLTF/toilet.gltf');
-      // text.setAttribute('title', place.tags.name);
+      // text.setAttribute('value', place.tags.name);
       // text.setAttribute('scale', '45 45 45');
-
-      let text = document.createElement('a-text');
-      text.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-      text.setAttribute('gltf-model', './Assets/GLTF/toilet.gltf');
-      text.setAttribute('value', place.tags.name);
-      text.setAttribute('scale', '45 45 45');
+      // text.setAttribute('position', '0 20 0');
 
       let model = document.createElement('a-entity');
       model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-      model.setAttribute('gltf-model', './Assets/GLTF/toilet.gltf');
-    //    model.setAttribute('rotation', '0 180 0');
+      model.setAttribute('gltf-model', './Assets/GLTF/toilet2.gltf');
+      model.setAttribute('scale', '45 45 45');
+      //model.setAttribute('text', place.tags.name);
+      model.setAttribute('rotation', '0 180 0');
       // model.setAttribute('title', place.tags.name);      
-      model.setAttribute('scale', '15 15 15');
+      
+
 
       model.addEventListener('loaded', () => {
         window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
@@ -98,7 +102,7 @@ function renderPlaces(places) {
 
       
 
-      // scene.appendChild(model);
-      scene.appendChild(text);
+      scene.appendChild(model);
+      //scene.appendChild(text);
   });
 }
