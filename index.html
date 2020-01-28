@@ -4,6 +4,8 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>GeoAR.js demo</title>
+    <link rel="stylesheet" href="./index.css">
+
     <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
     <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
@@ -15,6 +17,8 @@
 
 <body style='margin: 0; overflow: hidden;'>
     <a-scene
+        cursor='rayOrigin: entity; fuse: true; fuseTimeout: 0; mouseCursorStylesEnabled : true'
+        raycaster="objects: [gps-entity-place];"
         vr-mode-ui="enabled: false"
 		embedded
         arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
@@ -25,5 +29,7 @@
         <!-- <a-entity gps-entity-place="longitude: 4.806534; latitude: 45.769974;" scale='1 1 1' gltf-model="#monkey"></a-entity> -->
         <a-camera gps-camera rotation-reader></a-camera>
   </a-scene>
-  <!-- position EPSI gps-entity-place="longitude: 4.806534; latitude: 45.769974;" -->
+  <!-- position EPSI gps-entity-place="longitude: 4.806534; lati
+    
+    tude: 45.769974;" -->
 </body>

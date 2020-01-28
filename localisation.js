@@ -79,34 +79,58 @@ function renderPlaces(places) {
       // text.setAttribute('gltf-model', './Assets/GLTF/toilet2.gltf');
       // text.setAttribute('scale', '45 45 45');
       // text.setAttribute('title', place.tags.name);
-      // text.setAttribute('color', 'black');
+  
   
 
       let text = document.createElement('a-text');
       text.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
       text.setAttribute('gltf-model', './Assets/GLTF/toilet2.gltf');
       text.setAttribute('scale', '45 45 45');
-      text.setAttribute('value', place.tags.name);
-      text.setAttribute('color', 'black');
+      text.setAttribute('name', place.tags.name);
+      //text.setAttribute('color', 'black');
            
       
 
       let model = document.createElement('a-entity');
       model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
       model.setAttribute('gltf-model', './Assets/GLTF/toilet2.gltf');
-      model.setAttribute('scale', '45 45 45');
-      model.setAttribute('rotation', '0 180 0');
+      model.setAttribute('scale', '60 60 60');      
+      model.setAttribute('name', place.tags.name);
       
+      model.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
+
+        const clickListener = function (ev) {
+            ev.stopPropagation();
+            ev.preventDefault();
+
+            const name = ev.target.getAttribute('name');
+
+            const el = ev.detail.intersection && ev.detail.intersection.object.el;
+
+            if (el && el === ev.target) {
+                const label = document.createElement('span');
+                const container = document.createElement('div');
+                container.setAttribute('id', 'place-label');
+                label.innerText = name;
+                container.appendChild(label);
+                document.body.appendChild(container);
+
+                setTimeout(() => {
+                    container.parentElement.removeChild(container);
+                }, 1500);
+            }
+        };
+
+        model.addEventListener('click', clickListener);
+
+
+    //   model.addEventListener('loaded', () => {
+    //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+    //   });
+
       
 
-
-      model.addEventListener('loaded', () => {
-        window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-      });
-
-      
-
-      //scene.appendChild(model);
-      scene.appendChild(text);
+      scene.appendChild(model);
+    //   scene.appendChild(text);
   });
 }
