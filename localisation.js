@@ -71,6 +71,7 @@ function renderPlaces(places) {
   places.forEach((place) => {
       let latitude = place.lat;
       let longitude = place.lon;
+      var namePlace ;
 
       // add place name
       
@@ -94,8 +95,17 @@ function renderPlaces(places) {
       let model = document.createElement('a-entity');
       model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
       model.setAttribute('gltf-model', './Assets/GLTF/toilet2.gltf');
-      model.setAttribute('scale', '45 45 45');      
-      model.setAttribute('name', place.tags.name);
+      model.setAttribute('scale', '45 45 45');
+      if (place.tags.name === undefined )
+      {
+        namePlace ="Nom inconnu";
+      }
+      else{
+        namePlace = place.tags.name;
+      }
+        
+        
+      model.setAttribute('name', namePlace);
       
       model.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
 
