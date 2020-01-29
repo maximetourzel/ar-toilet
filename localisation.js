@@ -94,7 +94,7 @@ function renderPlaces(places) {
       let model = document.createElement('a-entity');
       model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
       model.setAttribute('gltf-model', './Assets/GLTF/toilet2.gltf');
-      model.setAttribute('scale', '60 60 60');      
+      model.setAttribute('scale', '45 45 45');      
       model.setAttribute('name', place.tags.name);
       
       model.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
